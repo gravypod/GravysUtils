@@ -18,9 +18,9 @@ public class InternetFiles {
 	 *            - File to download to
 	 * @throws IOException
 	 */
-	public static void downloadFrom(URL url, File dest) throws IOException {
+	public static void downloadFrom(final URL url, final File dest) throws IOException {
 	
-		downloadFrom(url.openConnection().getInputStream(), dest);
+		InternetFiles.downloadFrom(url.openConnection().getInputStream(), dest);
 	}
 	
 	/**
@@ -34,9 +34,9 @@ public class InternetFiles {
 	 *            - File to download to
 	 * @throws IOException
 	 */
-	public static void downloadFrom(URL url, Proxy proxy, File dest) throws IOException {
+	public static void downloadFrom(final URL url, final Proxy proxy, final File dest) throws IOException {
 	
-		downloadFrom(url.openConnection(proxy).getInputStream(), dest);
+		InternetFiles.downloadFrom(url.openConnection(proxy).getInputStream(), dest);
 	}
 	
 	/**
@@ -46,12 +46,12 @@ public class InternetFiles {
 	 * @param dest
 	 * @throws IOException
 	 */
-	public static void downloadFrom(InputStream stream, File dest) throws IOException {
+	public static void downloadFrom(final InputStream stream, final File dest) throws IOException {
 	
-		InputStream in = stream;
-		ByteArrayOutputStream fout = new ByteArrayOutputStream();
+		final InputStream in = stream;
+		final ByteArrayOutputStream fout = new ByteArrayOutputStream();
 		
-		byte[] buffer = new byte[1024];
+		final byte[] buffer = new byte[1024];
 		
 		int n;
 		

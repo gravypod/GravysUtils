@@ -27,7 +27,7 @@ public class FileConversion {
 			InputStream ios = null;
 			try {
 				ios = new FileInputStream(file);
-			} catch (FileNotFoundException e) {
+			} catch (final FileNotFoundException e) {
 				return "".getBytes();
 			}
 			
@@ -49,7 +49,7 @@ public class FileConversion {
 					ios.close();
 				}
 				
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				return "".getBytes();
 			}
 			
@@ -61,9 +61,18 @@ public class FileConversion {
 		
 	}
 	
-	public static void stringToFile(String fileContents, File file) throws IOException {
+	/**
+	 * Convert a string to a file.
+	 * 
+	 * @param fileContents
+	 *            - String that will be turned into a file
+	 * @param file
+	 *            - File to put the data into
+	 * @throws IOException
+	 */
+	public static void stringToFile(final String fileContents, final File file) throws IOException {
 	
-		bytesToFile(fileContents.getBytes(), file);
+		FileConversion.bytesToFile(fileContents.getBytes(), file);
 	}
 	
 	/**
@@ -75,9 +84,9 @@ public class FileConversion {
 	 *            - File to write to.
 	 * @throws IOException
 	 */
-	public static void bytesToFile(byte[] source, File file) throws IOException {
+	public static void bytesToFile(final byte[] source, final File file) throws IOException {
 	
-		FileOutputStream out = new FileOutputStream(file);
+		final FileOutputStream out = new FileOutputStream(file);
 		
 		out.write(source);
 		

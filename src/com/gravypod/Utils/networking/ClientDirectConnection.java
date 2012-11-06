@@ -15,18 +15,18 @@ public class ClientDirectConnection extends Thread implements INetwork {
 	
 	final int port;
 	
-	public ClientDirectConnection(InetAddress host, int port) throws IOException {
+	public ClientDirectConnection(final InetAddress host, final int port) throws IOException {
 	
-		this.dest = new Socket();
+		dest = new Socket();
 		this.host = host;
 		this.port = port;
 	}
 	
 	@Override
-	public void giveCodeAndRun(NetworkCode code) {
+	public void giveCodeAndRun(final NetworkCode code) {
 	
 		executionCode = code;
-		this.start();
+		start();
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class ClientDirectConnection extends Thread implements INetwork {
 		try {
 			dest.connect(new InetSocketAddress(host, port));
 			executionCode.setVars(dest.getInputStream(), dest.getOutputStream());
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		} finally {
 			executionCode.run();

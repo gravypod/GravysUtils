@@ -11,7 +11,7 @@ public class ServerNetwork extends Thread implements INetwork {
 	
 	private NetworkCode executionCode;
 	
-	private boolean continueRunning;
+	private boolean continueRunning = true;
 	
 	/**
 	 * Listen on one given IP
@@ -22,7 +22,7 @@ public class ServerNetwork extends Thread implements INetwork {
 	 *            - Port to listen on
 	 * @throws IOException
 	 */
-	public ServerNetwork(String ip, int port) throws IOException {
+	public ServerNetwork(final String ip, final int port) throws IOException {
 	
 		ss = new ServerSocket();
 		ss.bind(new InetSocketAddress(ip, port));
@@ -37,16 +37,17 @@ public class ServerNetwork extends Thread implements INetwork {
 	 * @throws IOException
 	 * 
 	 */
-	public ServerNetwork(int port) throws IOException {
+	public ServerNetwork(final int port) throws IOException {
 	
 		ss = new ServerSocket();
 		ss.bind(new InetSocketAddress("0.0.0.0", port));
 	}
 	
-	public void giveCodeAndRun(NetworkCode code) {
+	@Override
+	public void giveCodeAndRun(final NetworkCode code) {
 	
 		executionCode = code;
-		this.start();
+		start();
 	}
 	
 	@Override
@@ -58,13 +59,13 @@ public class ServerNetwork extends Thread implements INetwork {
 			
 			try {
 				connection = ss.accept();
+				connection.setTcpNoDelay(true);
 				executionCode.setVars(connection.getInputStream(), connection.getOutputStream());
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
-			} finally {
-				
-				executionCode.run();
 			}
+			
+			executionCode.run();
 		}
 		
 	}
@@ -76,7 +77,7 @@ public class ServerNetwork extends Thread implements INetwork {
 	 *            - Bool, true or false. True lets us run, false stops us. We
 	 *            are false by default
 	 */
-	public void setContinueRunning(boolean continueRunning) {
+	public void setContinueRunning(final boolean continueRunning) {
 	
 		this.continueRunning = continueRunning;
 	}

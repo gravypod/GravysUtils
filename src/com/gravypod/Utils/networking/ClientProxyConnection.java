@@ -27,10 +27,11 @@ public class ClientProxyConnection extends Thread implements INetwork {
 		this.proxy = proxy;
 	}
 	
-	public void giveCodeAndRun(NetworkCode code) {
+	@Override
+	public void giveCodeAndRun(final NetworkCode code) {
 	
 		executionCode = code;
-		this.start();
+		start();
 	}
 	
 	@Override
