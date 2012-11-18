@@ -6,13 +6,13 @@ import java.io.OutputStream;
 public interface NetworkCode extends Runnable {
 	
 	/**
-	 * Sets input and output streams from the connection a thread recives
+	 * Set steams from every connection
 	 * 
 	 * @param is
-	 *            - sockets input stream
+	 *            - Input stream of every connection
 	 * @param os
-	 *            - sockets output stream
+	 *            - Output stream of every connection
 	 */
-	void setVars(InputStream is, OutputStream os);
+	void setStreams(InputStream is, OutputStream os);
 	
 }

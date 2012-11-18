@@ -45,7 +45,8 @@ public class ClientProxyConnection extends Thread implements INetwork {
 				
 				s = new Socket(proxy);
 				s.connect(dest);
-				executionCode.setVars(s.getInputStream(), s.getOutputStream());
+				s.setTcpNoDelay(true);
+				executionCode.setStreams(s.getInputStream(), s.getOutputStream());
 			} catch (final IOException e) {
 				e.printStackTrace();
 			} finally {

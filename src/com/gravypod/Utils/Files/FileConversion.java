@@ -94,4 +94,55 @@ public class FileConversion {
 		
 	}
 	
+	/**
+	 * Converts a file to a String
+	 * 
+	 * @param file
+	 *            - The file you want the contents of.
+	 * @return
+	 */
+	public static String fileToString(final File file) {
+	
+		if (file != null && file.exists() && file.canRead() && !file.isDirectory()) {
+			final byte[] buffer = new byte[4096];
+			
+			final ByteArrayOutputStream ous = new ByteArrayOutputStream();
+			
+			InputStream ios = null;
+			try {
+				ios = new FileInputStream(file);
+			} catch (FileNotFoundException e) {
+				return "";
+			}
+			
+			int read = 0;
+			
+			try {
+				
+				while((read = ios.read(buffer)) != -1) {
+					ous.write(buffer, 0, read);
+				}
+				
+				if (ous != null) {
+					
+					ous.close();
+					
+				}
+				
+				if (ios != null) {
+					ios.close();
+				}
+				
+			} catch (IOException e) {
+				return "";
+			}
+			
+			return ous.toString();
+			
+		} else {
+			return "";
+		}
+		
+	}
+	
 }

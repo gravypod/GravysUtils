@@ -34,7 +34,8 @@ public class ClientDirectConnection extends Thread implements INetwork {
 	
 		try {
 			dest.connect(new InetSocketAddress(host, port));
-			executionCode.setVars(dest.getInputStream(), dest.getOutputStream());
+			dest.setTcpNoDelay(true);
+			executionCode.setStreams(dest.getInputStream(), dest.getOutputStream());
 		} catch (final IOException e) {
 			e.printStackTrace();
 		} finally {

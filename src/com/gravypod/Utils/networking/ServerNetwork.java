@@ -45,9 +45,10 @@ public class ServerNetwork extends Thread implements INetwork {
 	
 	@Override
 	public void giveCodeAndRun(final NetworkCode code) {
-	
+		
 		executionCode = code;
 		start();
+		
 	}
 	
 	@Override
@@ -60,7 +61,7 @@ public class ServerNetwork extends Thread implements INetwork {
 			try {
 				connection = ss.accept();
 				connection.setTcpNoDelay(true);
-				executionCode.setVars(connection.getInputStream(), connection.getOutputStream());
+				executionCode.setStreams(connection.getInputStream(), connection.getOutputStream());
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
